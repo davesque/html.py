@@ -12,7 +12,7 @@ from parsing.basic import spaces
 SIMPLE_VALUE_RE = re.compile(r'[a-zA-Z0-9-_]+')
 
 LABEL_CLASS_RE = re.compile(r'[a-zA-Z0-9-_]')
-LABEL_RE = re.compile(r'[a-zA-Z]([a-zA-Z0-9-_]*[a-zA-Z0-9])?')
+LABEL_RE = re.compile(r'^[a-zA-Z](.*[a-zA-Z0-9])?$')
 
 
 fst = lambda t: t[0]
@@ -29,7 +29,6 @@ self_closing_tag_end = Literal('/>')
 
 
 simple_value = TakeWhile(SIMPLE_VALUE_RE.match)
-
 double_quoted_value = First(Sequence(
     Discard(d_quo),
     TakeUntil(d_quo),
@@ -41,7 +40,6 @@ single_quoted_value = First(Sequence(
     Discard(s_quo),
 ))
 quoted_value = double_quoted_value | single_quoted_value
-
 value = simple_value | quoted_value
 
 

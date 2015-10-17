@@ -9,6 +9,7 @@ from ..parsers import (
     single_quoted_value,
     quoted_value,
     value,
+    label,
 )
 
 
@@ -71,3 +72,16 @@ class TestValue(BaseTestCases.TestParser):
         TestSimpleValue.VALUES.items() +
         TestQuotedValue.VALUES.items()
     )
+
+
+class TestLabel(BaseTestCases.TestParser):
+    PARSER = label
+    VALUES = {
+        'a': ('a', ''),
+        'A': ('A', ''),
+        '9a': None,
+        'test-label': ('test-label', ''),
+        'test-label9': ('test-label9', ''),
+        'test-label9_': None,
+        'test-label9-': None,
+    }

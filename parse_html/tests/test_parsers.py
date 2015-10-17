@@ -5,6 +5,8 @@ import unittest
 from parsing.exceptions import ParseError
 from ..parsers import (
     simple_value,
+    double_quoted_value,
+    single_quoted_value,
 )
 
 
@@ -28,4 +30,26 @@ class TestSimpleValue(BaseTestCases.TestParser):
         'arst-ARST_arst-1234_': ('arst-ARST_arst-1234_', ''),
         'arst-ARST arst-1234_': ('arst-ARST', ' arst-1234_'),
         ' arst-ARST arst-1234_': None,
+    }
+
+
+class TestDoubleQuotedValue(BaseTestCases.TestParser):
+    PARSER = double_quoted_value
+    VALUES = {
+        '"\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy"': (
+            '\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
+            '',
+        ),
+        '"inarst': None,
+    }
+
+
+class TestSingleQuotedValue(BaseTestCases.TestParser):
+    PARSER = single_quoted_value
+    VALUES = {
+        "'\"\"ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy'": (
+            '""ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
+            '',
+        ),
+        "'inarst": None,
     }

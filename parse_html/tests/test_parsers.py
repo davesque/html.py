@@ -7,6 +7,7 @@ from ..parsers import (
     simple_value,
     double_quoted_value,
     single_quoted_value,
+    quoted_value,
 )
 
 
@@ -52,4 +53,20 @@ class TestSingleQuotedValue(BaseTestCases.TestParser):
             '',
         ),
         "'inarst": None,
+    }
+
+
+class TestQuotedValue(BaseTestCases.TestParser):
+    PARSER = quoted_value
+    VALUES = {
+        "'\"\"ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy'": (
+            '""ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
+            '',
+        ),
+        '"\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy"': (
+            '\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
+            '',
+        ),
+        "'inarst": None,
+        '"inarst': None,
     }

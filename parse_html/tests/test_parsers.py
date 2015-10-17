@@ -8,6 +8,7 @@ from ..parsers import (
     double_quoted_value,
     single_quoted_value,
     quoted_value,
+    value,
 )
 
 
@@ -58,15 +59,15 @@ class TestSingleQuotedValue(BaseTestCases.TestParser):
 
 class TestQuotedValue(BaseTestCases.TestParser):
     PARSER = quoted_value
-    VALUES = {
-        "'\"\"ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy'": (
-            '""ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
-            '',
-        ),
-        '"\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy"': (
-            '\'\'ienienartieanrst098098234!@#$ARtienarsy einarsti ryuq  qy',
-            '',
-        ),
-        "'inarst": None,
-        '"inarst': None,
-    }
+    VALUES = dict(
+        TestDoubleQuotedValue.VALUES.items() +
+        TestSingleQuotedValue.VALUES.items()
+    )
+
+
+class TestValue(BaseTestCases.TestParser):
+    PARSER = value
+    VALUES = dict(
+        TestSimpleValue.VALUES.items() +
+        TestQuotedValue.VALUES.items()
+    )

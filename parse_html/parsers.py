@@ -9,7 +9,7 @@ from parsing.parsers import (
 from parsing.basic import spaces
 
 
-SIMPLE_VALUE_RE = re.compile(r'[a-zA-Z0-9-_]*')
+SIMPLE_VALUE_RE = re.compile(r'[a-zA-Z0-9-_]+')
 
 LABEL_CLASS_RE = re.compile(r'[a-zA-Z0-9-_]')
 LABEL_RE = re.compile(r'[a-zA-Z]([a-zA-Z0-9-_]*[a-zA-Z0-9])?')

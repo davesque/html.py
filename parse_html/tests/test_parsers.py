@@ -148,4 +148,12 @@ class TestNormalTag(BaseTestCases.TestParser):
     PARSER = normal_tag
     VALUES = {
         '<p>text content</p>': ((('p',), ('text content',), 'p'), ''),
+        '<p>text content <span>arst</span></p>': (
+            (
+                ('p',),
+                ('text content ', (('span',), ('arst',), 'span')),
+                'p',
+            ),
+            '',
+        ),
     }

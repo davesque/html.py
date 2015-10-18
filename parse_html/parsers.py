@@ -96,3 +96,5 @@ text = TakeUntil(Alternatives(
 ))
 
 tag_content.set(TakeAll(tag | text))
+
+document = tag_content

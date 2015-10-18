@@ -14,6 +14,7 @@ from ..parsers import (
     attributes,
     opening_tag,
     closing_tag,
+    self_closing_tag,
 )
 
 
@@ -120,15 +121,26 @@ class TestAttributes(BaseTestCases.TestParser):
 
 class TestOpeningTag(BaseTestCases.TestParser):
     PARSER = opening_tag
-    VALUE = {
+    VALUES = {
         '<p>': (('p',), ''),
-        '<p style="color: red;">': (('p', ('style', 'color: red;')), ''),
+        '<p style="color: red;" id="yo">': (('p', (('style', 'color: red;'), ('id', 'yo'))), ''),
     }
 
 
 class TestClosingTag(BaseTestCases.TestParser):
     PARSER = closing_tag
-    VALUE = {
+    VALUES = {
         '</p>': ('p', ''),
         '</  p  >': ('p', ''),
     }
+
+
+#class TestSelfClosingTag(BaseTestCases.TestParser):
+    #PARSER = self_closing_tag
+    #VALUES = {
+        #'<br/>': (),
+        ##'<test-xml-tag test-attr="1234"/>': ((, ''),
+    #}
+
+    #def test_it(self):
+        #self.assertEqual((('br',), ''), ('br', ''))

@@ -135,12 +135,9 @@ class TestClosingTag(BaseTestCases.TestParser):
     }
 
 
-#class TestSelfClosingTag(BaseTestCases.TestParser):
-    #PARSER = self_closing_tag
-    #VALUES = {
-        #'<br/>': (),
-        ##'<test-xml-tag test-attr="1234"/>': ((, ''),
-    #}
-
-    #def test_it(self):
-        #self.assertEqual((('br',), ''), ('br', ''))
+class TestSelfClosingTag(BaseTestCases.TestParser):
+    PARSER = self_closing_tag
+    VALUES = {
+        '<br/>': (('br',), ''),
+        '<test-xml-tag test-attr="1234"/>': (('test-xml-tag', (('test-attr', '1234'),)), ''),
+    }

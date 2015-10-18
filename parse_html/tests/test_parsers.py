@@ -104,10 +104,10 @@ class TestAttributes(BaseTestCases.TestParser):
     PARSER = attributes
     VALUES = {
         'arst=1234': ((('arst', '1234'),), ''),
-        'arst=1234 arst  = 1234 test-label = "1234" yo=\'dude\'': (
+        'arst=1234 test_label  = 1234 test-label = "1234" yo=\'dude\'': (
             (
                 ('arst', '1234'),
-                ('arst', '1234'),
+                ('test_label', '1234'),
                 ('test-label', '1234'),
                 ('yo', 'dude'),
             ),

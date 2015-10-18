@@ -12,6 +12,8 @@ from ..parsers import (
     label,
     attribute,
     attributes,
+    opening_tag,
+    closing_tag,
 )
 
 
@@ -113,4 +115,20 @@ class TestAttributes(BaseTestCases.TestParser):
             ),
             '',
         ),
+    }
+
+
+class TestOpeningTag(BaseTestCases.TestParser):
+    PARSER = opening_tag
+    VALUE = {
+        '<p>': (('p',), ''),
+        '<p style="color: red;">': (('p', ('style', 'color: red;')), ''),
+    }
+
+
+class TestClosingTag(BaseTestCases.TestParser):
+    PARSER = closing_tag
+    VALUE = {
+        '</p>': ('p', ''),
+        '</  p  >': ('p', ''),
     }

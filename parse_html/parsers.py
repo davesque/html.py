@@ -57,28 +57,28 @@ tag_body = Sequence(
     Discard(Optional(spaces)),
     Optional(attributes),
 )
-opening_tag = Sequence(
+
+opening_tag = First(Sequence(
     Discard(opening_tag_start),
     Discard(Optional(spaces)),
     tag_body,
     Discard(Optional(spaces)),
     Discard(tag_end),
-)
-closing_tag = Sequence(
+))
+closing_tag = First(Sequence(
     Discard(closing_tag_start),
     Discard(Optional(spaces)),
     tag_name,
     Discard(Optional(spaces)),
     Discard(tag_end),
-)
-
-self_closing_tag = Sequence(
+))
+self_closing_tag = First(Sequence(
     Discard(opening_tag_start),
     Discard(Optional(spaces)),
     tag_body,
     Discard(Optional(spaces)),
     Discard(self_closing_tag_end),
-)
+))
 
 tag_content = Placeholder()
 

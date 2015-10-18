@@ -4,7 +4,7 @@ import re
 
 from parsing.parsers import (
     Literal, Sequence, Discard, TakeUntil, TakeWhile, TakeIf, TakeAll,
-    Optional, Token, Placeholder, First,
+    Optional, Token, Placeholder, First, Alternatives,
 )
 from parsing.basic import spaces
 
@@ -89,4 +89,10 @@ normal_tag = Sequence(
 )
 
 tag = self_closing_tag | normal_tag
-tag_content.set(TakeAll(tag))
+text = TakeUntil(Alternatives(
+    opening_tag,
+    closing_tag,
+    self_closing_tag,
+))
+
+tag_content.set(TakeAll(tag | text))

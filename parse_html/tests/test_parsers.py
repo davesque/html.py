@@ -15,6 +15,7 @@ from ..parsers import (
     opening_tag,
     closing_tag,
     self_closing_tag,
+    normal_tag,
 )
 
 
@@ -140,4 +141,11 @@ class TestSelfClosingTag(BaseTestCases.TestParser):
     VALUES = {
         '<br/>': (('br',), ''),
         '<test-xml-tag test-attr="1234"/>': (('test-xml-tag', (('test-attr', '1234'),)), ''),
+    }
+
+
+class TestNormalTag(BaseTestCases.TestParser):
+    PARSER = normal_tag
+    VALUES = {
+        '<p>text content</p>': ((('p',), ('text content',), 'p'), ''),
     }

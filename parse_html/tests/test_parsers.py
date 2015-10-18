@@ -10,6 +10,8 @@ from ..parsers import (
     quoted_value,
     value,
     label,
+    attribute,
+    attributes,
 )
 
 
@@ -84,4 +86,31 @@ class TestLabel(BaseTestCases.TestParser):
         'test-label9': ('test-label9', ''),
         'test-label9_': None,
         'test-label9-': None,
+    }
+
+
+class TestAttribute(BaseTestCases.TestParser):
+    PARSER = attribute
+    VALUES = {
+        'arst=1234': (('arst', '1234'), ''),
+        'arst  =  1234': (('arst', '1234'), ''),
+        'arst ="1234"': (('arst', '1234'), ''),
+        "arst= '1234'": (('arst', '1234'), ''),
+        "arst '1234'": None,
+    }
+
+
+class TestAttributes(BaseTestCases.TestParser):
+    PARSER = attributes
+    VALUES = {
+        'arst=1234': ((('arst', '1234'),), ''),
+        'arst=1234 arst  = 1234 test-label = "1234" yo=\'dude\'': (
+            (
+                ('arst', '1234'),
+                ('arst', '1234'),
+                ('test-label', '1234'),
+                ('yo', 'dude'),
+            ),
+            '',
+        ),
     }
